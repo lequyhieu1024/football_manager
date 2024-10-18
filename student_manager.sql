@@ -55,7 +55,7 @@ CREATE TABLE `ch_messages` (
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `departments`
+-- Cấu trúc bảng cho bảng `clubs`
 --
 
 CREATE TABLE `departments` (
@@ -245,7 +245,7 @@ CREATE TABLE `student_subject` (
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `subjects`
+-- Cấu trúc bảng cho bảng `coaches`
 --
 
 CREATE TABLE `subjects` (
@@ -333,7 +333,7 @@ ALTER TABLE `ch_messages`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `departments`
+-- Chỉ mục cho bảng `clubs`
 --
 ALTER TABLE `departments`
   ADD PRIMARY KEY (`id`);
@@ -428,7 +428,7 @@ ALTER TABLE `student_subject`
   ADD KEY `student_subject_subject_id_foreign` (`subject_id`);
 
 --
--- Chỉ mục cho bảng `subjects`
+-- Chỉ mục cho bảng `coaches`
 --
 ALTER TABLE `subjects`
   ADD PRIMARY KEY (`id`);
@@ -469,7 +469,7 @@ ALTER TABLE `users`
 --
 
 --
--- AUTO_INCREMENT cho bảng `departments`
+-- AUTO_INCREMENT cho bảng `clubs`
 --
 ALTER TABLE `departments`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
@@ -523,7 +523,7 @@ ALTER TABLE `student_subject`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT cho bảng `subjects`
+-- AUTO_INCREMENT cho bảng `coaches`
 --
 ALTER TABLE `subjects`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;

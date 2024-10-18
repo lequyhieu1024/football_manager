@@ -3,7 +3,7 @@
     <div class="card p-4">
         <div class="card-title">
             <h1 class="text-primary">
-                {{ __('Register Subject') }}
+                {{ __('Register Coach') }}
             </h1>
         </div>
         {!! Form::open([
@@ -19,7 +19,7 @@
                         {!! Form::label('subject_' . $subjectId, $name, ['class' => 'form-check-label']) !!}
                     </div>
                 @empty
-                    <p>{{ __('No Subject') }}</p>
+                    <p>{{ __('No Coach') }}</p>
                 @endforelse
                 @if ($errors->has('subject_id'))
                     <span class="text-danger">{{ $errors->first('subject_ids') }}</span>
@@ -28,7 +28,7 @@
         </div>
         <div class="form-group mt-2">
             @if ($subjects->isNotEmpty())
-                {!! Form::submit(__('Register Subject'), ['class' => 'btn btn-primary']) !!}
+                {!! Form::submit(__('Register Coach'), ['class' => 'btn btn-primary']) !!}
             @endif
 
             {!! Form::close() !!}

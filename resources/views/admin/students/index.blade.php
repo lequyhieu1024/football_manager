@@ -15,11 +15,11 @@
     </style>
 
     <div class="card p-4 table-responsive">
-        <h1>{{ __('Student List') }}</h1>
+        <h1>{{ __('Player List') }}</h1>
 
         <div class="mb-4">
             @can('create_student')
-                <a href="{{ route('students.create') }}" class="btn btn-primary">+ {{ __('Create Student') }}</a>
+                <a href="{{ route('students.create') }}" class="btn btn-primary">+ {{ __('Create Player') }}</a>
             @endcan
             @can('import_excel')
                 <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#importExcel">
@@ -84,8 +84,8 @@
         <table class="table table-bordered">
             <thead>
                 <tr>
-                    <th>{{ __('Student Code') }}</th>
-                    <th>{{ __('Student Name') }}</th>
+                    <th>{{ __('Player Code') }}</th>
+                    <th>{{ __('Player Name') }}</th>
                     <th>{{ __('Gender') }}</th>
                     <th>{{ __('Birthday') }}</th>
                     <th>{{ __('Status') }}</th>

@@ -5,7 +5,7 @@ namespace App\Console\Commands;
 use App\Jobs\EmailBanJob;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
-use App\Models\Student;
+use App\Models\Player;
 
 class ResultStudy extends Command
 {
@@ -33,9 +33,9 @@ class ResultStudy extends Command
 
         try {
             DB::beginTransaction();
-            $listStudentFinished = Student::whereDoesntHave('subjects', function ($query) {
+            $listStudentFinished = Player::whereDoesntHave('coaches', function ($query) {
                 $query->whereNull('score');
-            })->whereHas('subjects', function ($query) {
+            })->whereHas('coaches', function ($query) {
                 $query->whereNotNull('score');
             })->get();
             foreach ($listStudentFinished as $student) {

@@ -40,7 +40,7 @@ class StudentsImport implements ToCollection, WithHeadingRow, WithValidation, Wi
         $upsertData = [];
         foreach ($rows as $row) {
             if (empty($row['id_sinh_vien']) || empty($row['id_mon_hoc'])) {
-                $this->errors[] = "Student code or Subject ID is missing.";
+                $this->errors[] = "Player code or Coach ID is missing.";
                 continue;
             }
 

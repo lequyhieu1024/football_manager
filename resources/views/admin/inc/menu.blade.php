@@ -5,7 +5,7 @@
                 <img width="40" src="/admin/img/logo.jpg" alt="Web Logo" class="img-fluid">
             </span>
             <span
-                class="app-brand-text demo menu-text text-base fw-bolder ms-2 text-uppercase">{{ __('Student Manager') }}</span>
+                class="app-brand-text demo menu-text text-base fw-bolder ms-2 text-uppercase">{{ __('Player Manager') }}</span>
         </a>
 
         <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
@@ -24,7 +24,7 @@
             </a>
         </li>
 
-        @canany(['list_student', 'create_student'])
+{{--        @canany(['list_student', 'create_student'])--}}
             <li class="menu-item">
                 <a href="javascript:void(0);" class="menu-link menu-toggle no-warning">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -32,27 +32,27 @@
                         <path stroke-linecap="round" stroke-linejoin="round"
                             d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a3 3 0 0 0-4.681 2.72 8.986 8.986 0 0 0 3.74.477m.94-3.197a5.971 5.971 0 0 0-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm6 3a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-13.5 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z" />
                     </svg>
-                    <div data-i18n="Student"> {{ __('Student Manager') }} </div>
+                    <div data-i18n="Student"> {{ __('Player Manager') }} </div>
                 </a>
                 <ul class="menu-sub">
-                    @can('list_student')
+{{--                    @can('list_student')--}}
                         <li class="menu-item">
                             <a href="{{ route('students.index') }}" class="menu-link">
-                                <div data-i18n="Danh sách khách hàng">{{ __('Student List') }}</div>
+                                <div data-i18n="Danh sách khách hàng">{{ __('Player List') }}</div>
                             </a>
                         </li>
-                    @endcan
-                    @can('create_student')
+{{--                    @endcan--}}
+{{--                    @can('create_student')--}}
                         <li class="menu-item">
                             <a href="{{ route('students.create') }}" class="menu-link">
-                                <div data-i18n="Tạo khách hàng mới"> {{ __('Create Student') }} </div>
+                                <div data-i18n="Tạo khách hàng mới"> {{ __('Create Player') }} </div>
                             </a>
                         </li>
-                    @endcan
+{{--                    @endcan--}}
                 </ul>
             </li>
-        @endcanany
-        @canany(['list_department', 'create_department'])
+{{--        @endcanany--}}
+{{--        @canany(['list_department', 'create_department'])--}}
             <li class="menu-item">
                 <a href="javascript:void(0);" class="menu-link menu-toggle no-warning">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" stroke-width="1.5"
@@ -62,27 +62,27 @@
                         <path
                             d="M2 11h1v1H2zm2 0h1v1H4zm-2 2h1v1H2zm2 0h1v1H4zm4-4h1v1H8zm2 0h1v1h-1zm-2 2h1v1H8zm2 0h1v1h-1zm2-2h1v1h-1zm0 2h1v1h-1zM8 7h1v1H8zm2 0h1v1h-1zm2 0h1v1h-1zM8 5h1v1H8zm2 0h1v1h-1zm2 0h1v1h-1zm0-2h1v1h-1z" />
                     </svg>
-                    <div data-i18n="Department"> {{ __('Department Manager') }} </div>
+                    <div data-i18n="Department"> {{ __('Club Manager') }} </div>
                 </a>
                 <ul class="menu-sub">
-                    @can('list_department')
+{{--                    @can('list_department')--}}
                         <li class="menu-item">
-                            <a href="{{ route('departments.index') }}" class="menu-link">
-                                <div data-i18n="Danh sách khách hàng">{{ __('Department List') }}</div>
+                            <a href="{{ route('clubs.index') }}" class="menu-link">
+                                <div data-i18n="Danh sách khách hàng">{{ __('Club List') }}</div>
                             </a>
                         </li>
-                    @endcan
-                    @can('create_department')
+{{--                    @endcan--}}
+{{--                    @can('create_department')--}}
                         <li class="menu-item">
-                            <a href="{{ route('departments.create') }}" class="menu-link">
-                                <div data-i18n="Tạo khách hàng mới"> {{ __('Create Department') }} </div>
+                            <a href="{{ route('clubs.create') }}" class="menu-link">
+                                <div data-i18n="Tạo khách hàng mới"> {{ __('Create Club') }} </div>
                             </a>
                         </li>
-                    @endcan
+{{--                    @endcan--}}
                 </ul>
             </li>
-        @endcanany
-        @canany(['list_subject', 'create_subject'])
+{{--        @endcanany--}}
+{{--        @canany(['list_subject', 'create_subject'])--}}
             <li class="menu-item">
                 <a href="javascript:void(0);" class="menu-link menu-toggle no-warning">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" stroke-width="1.5"
@@ -92,27 +92,27 @@
                         <path
                             d="M5 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 5 8m0-2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m0 5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m-1-5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0M4 8a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0m0 2.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0" />
                     </svg>
-                    <div data-i18n="Department"> {{ __('Subject Manager') }} </div>
+                    <div data-i18n="Department"> {{ __('Coach Manager') }} </div>
                 </a>
                 <ul class="menu-sub">
-                    @can('list_subject')
+{{--                    @can('list_subject')--}}
                         <li class="menu-item">
-                            <a href="{{ route('subjects.index') }}" class="menu-link">
-                                <div data-i18n="Danh sách khách hàng">{{ __('Subject List') }}</div>
+                            <a href="{{ route('coaches.index') }}" class="menu-link">
+                                <div data-i18n="Danh sách khách hàng">{{ __('Coach List') }}</div>
                             </a>
                         </li>
-                    @endcan
-                    @can('create_student')
+{{--                    @endcan--}}
+{{--                    @can('create_student')--}}
                         <li class="menu-item">
-                            <a href="{{ route('subjects.create') }}" class="menu-link">
-                                <div data-i18n="Tạo khách hàng mới"> {{ __('Create Subject') }} </div>
+                            <a href="{{ route('coaches.create') }}" class="menu-link">
+                                <div data-i18n="Tạo khách hàng mới"> {{ __('Create Coach') }} </div>
                             </a>
                         </li>
-                    @endcan
+{{--                    @endcan--}}
                 </ul>
             </li>
-        @endcanany
-        @canany(['list_role', 'create_role'])
+{{--        @endcanany--}}
+{{--        @canany(['list_role', 'create_role'])--}}
             <li class="menu-item">
                 <a href="javascript:void(0);" class="menu-link menu-toggle no-warning">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" stroke-width="1.5"
@@ -123,24 +123,24 @@
                     <div data-i18n="Department"> {{ __('Role Manager') }} </div>
                 </a>
                 <ul class="menu-sub">
-                    @can('list_role')
+{{--                    @can('list_role')--}}
                         <li class="menu-item">
                             <a href="{{ route('roles.index') }}" class="menu-link">
                                 <div data-i18n="Danh sách khách hàng">{{ __('Role List') }}</div>
                             </a>
                         </li>
-                    @endcan
-                    @can('create_role')
+{{--                    @endcan--}}
+{{--                    @can('create_role')--}}
                         <li class="menu-item">
                             <a href="{{ route('roles.create') }}" class="menu-link">
                                 <div data-i18n="Tạo khách hàng mới"> {{ __('Create Role') }} </div>
                             </a>
                         </li>
-                    @endcan
+{{--                    @endcan--}}
                 </ul>
             </li>
-        @endcanany
-        @can('self_manager_profile')
+{{--        @endcanany--}}
+{{--        @can('self_manager_profile')--}}
             <li class="menu-item">
                 <a href="{{ route('profile.edit') }}" class="menu-link">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" stroke-width="1.5"
@@ -152,30 +152,5 @@
                     <div data-i18n="Tạo khách hàng mới"> {{ __('Profile Manager') }} </div>
                 </a>
             </li>
-        @endcan
-        <li class="menu-item">
-            <a href="/chatify" class="menu-link">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" stroke-width="1.5"
-                    fill="currentColor" class="bi bi-chat-dots menu-icon  bx bx-layout" viewBox="0 0 16 16">
-                    <path
-                        d="M5 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0m4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0m3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2" />
-                    <path
-                        d="m2.165 15.803.02-.004c1.83-.363 2.948-.842 3.468-1.105A9 9 0 0 0 8 15c4.418 0 8-3.134 8-7s-3.582-7-8-7-8 3.134-8 7c0 1.76.743 3.37 1.97 4.6a10.4 10.4 0 0 1-.524 2.318l-.003.011a11 11 0 0 1-.244.637c-.079.186.074.394.273.362a22 22 0 0 0 .693-.125m.8-3.108a1 1 0 0 0-.287-.801C1.618 10.83 1 9.468 1 8c0-3.192 3.004-6 7-6s7 2.808 7 6-3.004 6-7 6a8 8 0 0 1-2.088-.272 1 1 0 0 0-.711.074c-.387.196-1.24.57-2.634.893a11 11 0 0 0 .398-2" />
-                </svg>
-                <div data-i18n="Tạo khách hàng mới"> {{ __('Messages') }} Chatify</div>
-            </a>
-        </li>
-        <li class="menu-item">
-            <a href="{{ route('chat') }}" class="menu-link">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" stroke-width="1.5"
-                    fill="currentColor" class="bi bi-chat-dots menu-icon  bx bx-layout" viewBox="0 0 16 16">
-                    <path
-                        d="M5 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0m4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0m3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2" />
-                    <path
-                        d="m2.165 15.803.02-.004c1.83-.363 2.948-.842 3.468-1.105A9 9 0 0 0 8 15c4.418 0 8-3.134 8-7s-3.582-7-8-7-8 3.134-8 7c0 1.76.743 3.37 1.97 4.6a10.4 10.4 0 0 1-.524 2.318l-.003.011a11 11 0 0 1-.244.637c-.079.186.074.394.273.362a22 22 0 0 0 .693-.125m.8-3.108a1 1 0 0 0-.287-.801C1.618 10.83 1 9.468 1 8c0-3.192 3.004-6 7-6s7 2.808 7 6-3.004 6-7 6a8 8 0 0 1-2.088-.272 1 1 0 0 0-.711.074c-.387.196-1.24.57-2.634.893a11 11 0 0 0 .398-2" />
-                </svg>
-                <div data-i18n="Tạo khách hàng mới"> {{ __('Messages') }} Customize</div>
-            </a>
-        </li>
     </ul>
 </aside>

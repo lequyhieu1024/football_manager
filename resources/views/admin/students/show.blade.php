@@ -43,7 +43,7 @@
                     </div>
                     <div class="col-md-12 border-bottom mb-2 mt-2">
                         <div class="row">
-                            <div class="col-md-4"> {{ __('Department') }} :</div>
+                            <div class="col-md-4"> {{ __('Club') }} :</div>
                             <div class="col-md-8"> {{ $student->department->name }} </div>
                         </div>
                     </div>

@@ -23,14 +23,14 @@ class User extends Authenticatable
 
     public function student()
     {
-        return $this->hasOne(Student::class);
+        return $this->hasOne(Player::class);
     }
 
     public function getAvatarAttribute()
     {
-        if ($this->student && $this->student->avatar) {
-            return $this->student->avatar;
-        }
+//        if ($this->user) {
+//            return $this->avatar;
+//        }
         return 'uploads/default-avatar.png';
     }
 

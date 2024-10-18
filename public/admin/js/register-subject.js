@@ -1,7 +1,7 @@
 
 
 function viewModal2() {
-    const checkboxes = document.querySelectorAll('.subjects:checked');
+    const checkboxes = document.querySelectorAll('.coaches:checked');
     const subjectsContainer = document.getElementById('subjectsContainer');
 
     subjectsContainer.innerHTML = '';

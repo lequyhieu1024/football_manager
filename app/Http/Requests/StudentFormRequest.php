@@ -33,7 +33,7 @@ class StudentFormRequest extends FormRequest
             'gender' => 'required',
             'birthday' => 'required|before:today|after_or_equal:1900-01-01',
             'address' => 'required|max:255',
-            'department_id' => 'required|exists:departments,id',
+            'department_id' => 'required|exists:clubs,id',
             'password' => request()->isMethod('put') ? 'nullable|min:8' : 'required|min:8'
         ];
         if (!request()->isMethod('PUT')) {

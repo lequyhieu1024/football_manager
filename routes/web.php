@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SystemController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,8 +28,8 @@ Route::middleware('auth')->group(function () {
     Route::get('dashboard', function () {
         return view('dashboard');
     })->middleware(['auth', 'verified'])->name('dashboard');
-    Route::get('profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::put('profile', [ProfileController::class, 'updateAvatar'])->name('profile.update-avatar');
-    // Route::delete('profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('profile', [SystemController::class, 'edit'])->name('profile.edit');
+    Route::put('profile', [SystemController::class, 'updateAvatar'])->name('profile.update-avatar');
+    // Route::delete('profile', [SystemController::class, 'destroy'])->name('profile.destroy');
 });
 require __DIR__ . '/auth.php';

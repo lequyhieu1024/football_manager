@@ -6,7 +6,7 @@ use Maatwebsite\Excel\Concerns\FromArray;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithChunkReading;
 use Faker\Factory as Faker;
-use App\Models\Student;
+use App\Models\Player;
 class StudentsExport implements FromArray, WithHeadings, WithChunkReading
 {
     private const SUBJECT_ID_MIN = 2;
@@ -22,7 +22,7 @@ class StudentsExport implements FromArray, WithHeadings, WithChunkReading
     public function __construct()
     {
         $this->faker = Faker::create();
-        $this->studentIds = Student::pluck('id')->toArray();
+        $this->studentIds = Player::pluck('id')->toArray();
     }
 
     /**

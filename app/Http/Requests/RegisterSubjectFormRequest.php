@@ -22,7 +22,7 @@ class RegisterSubjectFormRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'subject_id' => 'required|exists:subjects,id',
+            'subject_id' => 'required|exists:coaches,id',
         ];
     }
 }

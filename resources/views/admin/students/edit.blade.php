@@ -3,7 +3,7 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content data">
                 <div class="modal-header modal-header-image">
-                    <h1 class="modal-title border-bottom">{{ __('Update Student') }}</h1>
+                    <h1 class="modal-title border-bottom">{{ __('Update Player') }}</h1>
                     <button type="button" class="btn-close" id="btn-close" data-bs-dismiss="modal" aria-label="Close">
                         <i class="las la-times" aria-hidden="true"></i>
                     </button>
@@ -26,10 +26,10 @@
                                     {!! Form::file('avatar', ['class' => 'form-control', 'accept' => 'image/*', 'id' => 'avatar']) !!}
                                 </div>
                                 <div class="form-group col-md-6 mb-3">
-                                    {!! Form::label('name', __('Student Name'), ['class' => 'mb-1']) !!} <span class="text-danger">(*)</span>
+                                    {!! Form::label('name', __('Player Name'), ['class' => 'mb-1']) !!} <span class="text-danger">(*)</span>
                                     {!! Form::text('name', $student->user->name, [
                                         'class' => 'form-control',
-                                        'placeholder' => __('Student Name'),
+                                        'placeholder' => __('Player Name'),
                                         'id' => 'name',
                                     ]) !!}
                                 </div>
@@ -75,10 +75,10 @@
                                     ]) !!}
                                 </div>
                                 <div class="form-group col-md-6 mb-3">
-                                    {!! Form::label('department_id', __('Choose Department'), ['class' => 'mb-1']) !!} <span class="text-danger">(*)</span>
+                                    {!! Form::label('department_id', __('Choose Club'), ['class' => 'mb-1']) !!} <span class="text-danger">(*)</span>
                                     {!! Form::select('department_id', $departments, $student->department_id, [
                                         'class' => 'form-control',
-                                        'placeholder' => '--' . __('Choose Department') . '--',
+                                        'placeholder' => '--' . __('Choose Club') . '--',
                                         'id' => 'department_id',
                                     ]) !!}
                                 </div>
@@ -92,7 +92,7 @@
                                     ]) !!}
                                 </div>
                                 <div class="form-group">
-                                    {!! Form::submit(__('Update Student'), ['class' => 'btn btn-primary']) !!}
+                                    {!! Form::submit(__('Update Player'), ['class' => 'btn btn-primary']) !!}
                                 </div>
                             </div>
                             {!! Form::close() !!}

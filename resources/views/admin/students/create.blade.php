@@ -2,17 +2,17 @@
 @section('content')
     <div class="card p-4">
         <div class="card-title">
-            <h1 class="text-primary">{{ __('Create Student') }}</h1>
+            <h1 class="text-primary">{{ __('Create Player') }}</h1>
         </div>
         <div class="card-form row">
             {!! Form::open(['route' => 'students.store', 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
             @csrf
             <div class="row">
                 <div class="form-group col-md-6 mb-3">
-                    {!! Form::label('name', __('Student Name'), ['class' => 'mb-1']) !!} <span class="text-danger">(*)</span>
+                    {!! Form::label('name', __('Player Name'), ['class' => 'mb-1']) !!} <span class="text-danger">(*)</span>
                     {!! Form::text('name', null, [
                         'class' => 'form-control',
-                        'placeholder' => __('Student Name'),
+                        'placeholder' => __('Player Name'),
                     ]) !!}
                     @error('name')
                         <div class="text-danger">{{ $message }}</div>
@@ -72,10 +72,10 @@
                     {!! Form::file('avatar', ['class' => 'form-control']) !!}
                 </div>
                 <div class="form-group col-md-6 mb-3">
-                    {!! Form::label('department_id', __('Chose Department'), ['class' => 'mb-1']) !!} <span class="text-danger">(*)</span>
+                    {!! Form::label('department_id', __('Chose Club'), ['class' => 'mb-1']) !!} <span class="text-danger">(*)</span>
                     {!! Form::select('department_id', $departments, null, [
                         'class' => 'form-control',
-                        'placeholder' => '--' . __('Chose Department') . '--',
+                        'placeholder' => '--' . __('Chose Club') . '--',
                     ]) !!}
                     @error('department_id')
                         <div class="text-danger">{{ $message }}</div>
@@ -92,7 +92,7 @@
                     @enderror
                 </div>
                 <div class="form-group">
-                    {!! Form::submit(__('Create Student'), ['class' => 'btn btn-primary']) !!}
+                    {!! Form::submit(__('Create Player'), ['class' => 'btn btn-primary']) !!}
                     {!! Form::reset(__('Reset'), [
                         'type' => 'reset',
                         'class' => 'btn btn-secondary',

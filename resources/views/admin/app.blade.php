@@ -58,7 +58,7 @@
                                     data-bs-toggle="dropdown">
                                     <div class="avatar avatar-online">
                                         @php
-                                            $defaultAvatar = Auth::user()->avatar;
+                                            $defaultAvatar = Auth::check() ? 'uploads/default-avatar.png': 'uploads/default-avatar.png';
                                         @endphp
                                         <img src="/{{ $defaultAvatar }}" class="rounded-circle" alt="">
                                     </div>

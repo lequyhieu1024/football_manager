@@ -3,9 +3,9 @@
 use App\Http\Controllers\Admin\ChatController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\RoleController;
-use App\Http\Controllers\Admin\StudentController;
-use App\Http\Controllers\Admin\SubjectController;
-use App\Http\Controllers\Admin\DepartmentController;
+use App\Http\Controllers\Admin\PlayerController;
+use App\Http\Controllers\Admin\CoachController;
+use App\Http\Controllers\Admin\ClubController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,27 +22,27 @@ Route::get('dashboard', function () {
     return view('admin.dashboard');
 })->name('admin.dashboard');
 
-Route::resource('students', StudentController::class);
+Route::resource('students', PlayerController::class);
 
-Route::get('students/{student}/subject', [StudentController::class, 'getSubjects'])->name('students.subject');
+Route::get('students/{student}/subject', [PlayerController::class, 'getSubjects'])->name('students.subject');
 
-Route::get('students/{student}/{subject}/edit-score', [StudentController::class, 'editScore'])->name('students.edit-score');
+Route::get('students/{student}/{subject}/edit-score', [PlayerController::class, 'editScore'])->name('students.edit-score');
 
-Route::get('students/{student}/register-subject', [StudentController::class, 'registerSubject'])->name('students.register-subject');
+Route::get('students/{student}/register-subject', [PlayerController::class, 'registerSubject'])->name('students.register-subject');
 
-Route::post('students/{student}/register-subject', [StudentController::class, 'storeRegisterSubject'])->name('students.store-register-subject');
+Route::post('students/{student}/register-subject', [PlayerController::class, 'storeRegisterSubject'])->name('students.store-register-subject');
 
-Route::put('students/{student}/update-scores', [StudentController::class, 'updateScores'])->name('students.update-scores');
+Route::put('students/{student}/update-scores', [PlayerController::class, 'updateScores'])->name('students.update-scores');
 
-Route::post('excel/import-student', [StudentController::class, 'import'])->name('students.import');
+Route::post('excel/import-student', [PlayerController::class, 'import'])->name('students.import');
 
-Route::get('excel/export-template', [StudentController::class, 'getTemplate'])->name('students.get-template');
+Route::get('excel/export-template', [PlayerController::class, 'getTemplate'])->name('students.get-template');
 
-Route::get('list-subject-ajax', [StudentController::class, 'getListSubjectAjax']);
+Route::get('list-subject-ajax', [PlayerController::class, 'getListSubjectAjax']);
 
-Route::resource('departments', DepartmentController::class);
+Route::resource('clubs', ClubController::class);
 
-Route::resource('subjects', SubjectController::class);
+Route::resource('coaches', CoachController::class);
 
 Route::resource('roles', RoleController::class);
 

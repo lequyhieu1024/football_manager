@@ -128,7 +128,7 @@ $(document).ready(async function() {
 
     $subjectsContainer.on('click', '.removeBtn', function () {
         $(this).closest('.old_html').remove();
-        selectedSubjectIds = selectedSubjectIds.filter(subjectId => subjectId !== $(this).closest('.subjects').find('select').val());
+        selectedSubjectIds = selectedSubjectIds.filter(subjectId => subjectId !== $(this).closest('.coaches').find('select').val());
         updateAllSelectOptions();
         hideBtn();
     });
@@ -136,7 +136,7 @@ $(document).ready(async function() {
     $subjectsContainer.on('click', function (e) {
         if (e.target.classList.contains('removeBtn')) {
             e.target.closest('.d-flex').remove();
-            selectedSubjectIds = selectedSubjectIds.filter(subjectId => subjectId !== $(this).closest('.subjects').find('select').val());
+            selectedSubjectIds = selectedSubjectIds.filter(subjectId => subjectId !== $(this).closest('.coaches').find('select').val());
             updateAllSelectOptions();
             hideBtn();
         }

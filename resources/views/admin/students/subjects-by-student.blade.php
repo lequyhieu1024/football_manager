@@ -31,12 +31,12 @@
         <div class="card-content">
             <h2 class="card-content__title mt-4 d-flex justify-content-between">
                 <div>
-                    {{ __('Subject List') }}
+                    {{ __('Coach List') }}
                 </div>
                 <div>
                     @canany(['register_subject', 'self_register_subject'])
                         <a href="{{ route('students.register-subject', $students->id) }}" class="btn btn-primary">+
-                            {{ __('Register Subject') }}</a>
+                            {{ __('Register Coach') }}</a>
                     @endcanany
                 </div>
             </h2>
@@ -114,7 +114,7 @@
                                 class="btn btn-primary d-none mt-2">{{ __('Update Score') }}</button>
                         @can('update_score')
                             <button type="button" class="btn btn-success mt-2" id="addBtn">
-                                + {{ __('Add Score Subject') }}
+                                + {{ __('Add Score Coach') }}
                             </button>
                         @endcan
                     </form>

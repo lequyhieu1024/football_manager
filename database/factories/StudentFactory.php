@@ -2,12 +2,12 @@
 
 namespace Database\Factories;
 
-use App\Models\Student;
+use App\Models\Player;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Student>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Player>
  */
 class StudentFactory extends Factory
 {
@@ -30,7 +30,7 @@ class StudentFactory extends Factory
 
     public function configure()
     {
-        return $this->afterCreating(function (Student $student) {
+        return $this->afterCreating(function (Player $student) {
             $student->student_code = date('Y') . $student->user_id;
             $student->save();
         });
