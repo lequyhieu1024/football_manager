@@ -20,7 +20,7 @@ return new class extends Migration
             $table->boolean('gender');
             $table->integer('yob')->nullable();
             $table->string('address')->nullable();
-            $table->string('description')->nullable();
+            $table->text('description')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

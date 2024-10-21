@@ -4,19 +4,17 @@ namespace App\Enums;
 
 enum Status: int
 {
-    case BANNED = 4;
-    case NOT_STUDIED_YET = 1;
-    case STUDYING = 2;
-    case FINISHED = 3;
+    case NOT_STARTED = 1;
+    case IN_PROGRESS = 2;
+    case COMPLETED = 3;
 
     public static function getSelectOptions(): array
     {
         return [
             '' => __('Chose Status'),
-            self::BANNED->value => __('Banned'),
-            self::NOT_STUDIED_YET->value => __("Haven't studied yet"),
-            self::STUDYING->value => __('Studying'),
-            self::FINISHED->value => __('Finished'),
+            self::NOT_STARTED->value => __("Haven't started yet"),
+            self::IN_PROGRESS->value => __('In progress'),
+            self::COMPLETED->value => __('Finished'),
         ];
     }
 }

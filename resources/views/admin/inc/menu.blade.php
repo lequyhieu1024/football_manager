@@ -5,7 +5,7 @@
                 <img width="40" src="/admin/img/logo.jpg" alt="Web Logo" class="img-fluid">
             </span>
             <span
-                class="app-brand-text demo menu-text text-base fw-bolder ms-2 text-uppercase">{{ __('Player Manager') }}</span>
+                class="app-brand-text demo menu-text text-base fw-bolder ms-2 text-uppercase">{{ __('Yard Manager') }}</span>
         </a>
 
         <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
@@ -37,14 +37,14 @@
                 <ul class="menu-sub">
 {{--                    @can('list_student')--}}
                         <li class="menu-item">
-                            <a href="{{ route('students.index') }}" class="menu-link">
+                            <a href="{{ route('players.index') }}" class="menu-link">
                                 <div data-i18n="Danh sách khách hàng">{{ __('Player List') }}</div>
                             </a>
                         </li>
 {{--                    @endcan--}}
 {{--                    @can('create_student')--}}
                         <li class="menu-item">
-                            <a href="{{ route('students.create') }}" class="menu-link">
+                            <a href="{{ route('players.create') }}" class="menu-link">
                                 <div data-i18n="Tạo khách hàng mới"> {{ __('Create Player') }} </div>
                             </a>
                         </li>

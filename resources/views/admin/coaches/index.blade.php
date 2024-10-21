@@ -64,7 +64,7 @@
                         <td>{{ $coach->gender == 1 ? __('Male') : __('Female') }}</td>
                         <td>{{ $coach->yob }}</td>
                         <td>{{ $coach->address }}</td>
-                        <td>{{ $coach->description }}</td>
+                        <td>{!! $coach->description !!}</td>
                         <td>
                             {{--                        @can('update_coach')--}}
                             <a href="{{ route('coaches.edit', $coach->id) }}" class="btn btn-warning">

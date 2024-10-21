@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('phone', 30);
             $table->string('email')->nullable();
             $table->string('address_text');
-            $table->string('address_embedded');
+            $table->text('address_embedded');
             $table->time('opening_hour')->nullable();
             $table->time('closing_hour')->nullable();
             $table->string('opening_day_id');

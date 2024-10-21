@@ -69,7 +69,7 @@
                         <td>{{ $club->founding_date }}</td>
                         <td>{{ $club->coach ? $club->coach->name : __('N/A') }}</td>
                         <td>{{ $club->manager ? $club->manager->name : __('N/A') }}</td>
-                        <td>{{ $club->description }}</td>
+                        <td class="text-truncate">{!! $club->description !!}</td>
                         <td>
                             <a href="{{ route('clubs.edit', $club->id) }}" class="btn btn-warning">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">

@@ -37,7 +37,7 @@ WHERE student_id IN (
 );
 
 
--- + xóa tất cả thông tin của sinh viên tuổi >= 30; (students + users)
+-- + xóa tất cả thông tin của sinh viên tuổi >= 30; (players + users)
 
 DELETE FROM users
 WHERE id IN (
@@ -46,7 +46,7 @@ WHERE id IN (
     WHERE TIMESTAMPDIFF(YEAR, birthday, CURDATE()) >= 30
 );
 -- set ondele cascade nên chỉ chạy lệnh trên đã xóa cả student, nếu không cascade thì thêm lệnh dưới
--- DELETE FROM students
+-- DELETE FROM players
 -- WHERE TIMESTAMPDIFF(YEAR, birthday, CURDATE()) >= 30;
 
 

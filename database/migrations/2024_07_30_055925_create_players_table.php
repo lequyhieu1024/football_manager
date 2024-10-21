@@ -23,8 +23,9 @@ return new class extends Migration
             $table->integer('height')->nullable();
             $table->string('position')->nullable();
             $table->string('address')->nullable();
-            $table->string('description')->nullable();
-            $table->string('club_id');
+            $table->text('description')->nullable();
+            $table->unsignedBigInteger('club_id');
+            $table->timestamps();
             $table->softDeletes();
         });
     }

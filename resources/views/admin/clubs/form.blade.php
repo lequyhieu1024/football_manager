@@ -24,7 +24,7 @@
         @endif
 
         <div class="row">
-            <div class="form-group col-md-6">
+            <div class="form-group mb-2 col-md-6">
                 {!! Form::label('name', __('Club Name')) !!}
                 {!! Form::text('name', null, [
                     'class' => 'form-control',
@@ -35,7 +35,7 @@
                 @endif
             </div>
 
-            <div class="form-group col-md-6">
+            <div class="form-group mb-2 col-md-6">
                 {!! Form::label('logo', __('Club Logo')) !!}
                 {!! Form::file('logo', [
                     'class' => 'form-control',
@@ -45,7 +45,7 @@
                 @endif
             </div>
 
-            <div class="form-group col-md-6">
+            <div class="form-group mb-2 col-md-6">
                 {!! Form::label('total_members', __('Total Members')) !!}
                 {!! Form::number('total_members', null, [
                     'class' => 'form-control',
@@ -56,7 +56,7 @@
                 @endif
             </div>
 
-            <div class="form-group col-md-6">
+            <div class="form-group mb-2 col-md-6">
                 {!! Form::label('phone', __('Phone')) !!}
                 {!! Form::text('phone', null, [
                     'class' => 'form-control',
@@ -67,7 +67,7 @@
                 @endif
             </div>
 
-            <div class="form-group col-md-6">
+            <div class="form-group mb-2 col-md-6">
                 {!! Form::label('email', __('Email')) !!}
                 {!! Form::email('email', null, [
                     'class' => 'form-control',
@@ -78,7 +78,7 @@
                 @endif
             </div>
 
-            <div class="form-group col-md-6">
+            <div class="form-group mb-2 col-md-6">
                 {!! Form::label('founding_date', __('Founding Date')) !!}
                 {!! Form::date('founding_date', null, [
                     'class' => 'form-control',
@@ -88,7 +88,7 @@
                 @endif
             </div>
 
-            <div class="form-group col-md-6">
+            <div class="form-group mb-2 col-md-6">
                 {!! Form::label('coach_id', __('Coach')) !!}
                 {!! Form::select('coach_id', $coaches, null, [
                     'class' => 'form-control',
@@ -99,7 +99,7 @@
                 @endif
             </div>
 
-            <div class="form-group col-md-6">
+            <div class="form-group mb-2 col-md-6">
                 {!! Form::label('manager_id', __('Manager')) !!}
                 {!! Form::select('manager_id', $coaches, null, [
                     'class' => 'form-control',
@@ -110,11 +110,12 @@
                 @endif
             </div>
 
-            <div class="form-group col-md-12">
+            <div class="form-group mb-2 col-md-12">
                 {!! Form::label('description', __('Description')) !!}
                 {!! Form::textarea('description', null, [
                     'class' => 'form-control',
                     'placeholder' => __('Description'),
+                    'id' => 'editor'
                 ]) !!}
                 @if ($errors->has('description'))
                     <span class="text-danger">{{ $errors->first('description') }}</span>
@@ -122,7 +123,7 @@
             </div>
         </div>
 
-        <div class="form-group mt-2">
+        <div class="form-group mb-2 mt-2">
             {!! Form::submit($content, ['class' => 'btn btn-primary']) !!}
             {!! Form::close() !!}
             <a href="{{ route('clubs.index') }}" class="btn btn-info">{{ __('Back') }}</a>

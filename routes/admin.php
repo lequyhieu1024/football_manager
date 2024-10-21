@@ -22,21 +22,21 @@ Route::get('dashboard', function () {
     return view('admin.dashboard');
 })->name('admin.dashboard');
 
-Route::resource('students', PlayerController::class);
+Route::resource('players', PlayerController::class);
 
-Route::get('students/{student}/subject', [PlayerController::class, 'getSubjects'])->name('students.subject');
+Route::get('players/{student}/subject', [PlayerController::class, 'getSubjects'])->name('players.subject');
 
-Route::get('students/{student}/{subject}/edit-score', [PlayerController::class, 'editScore'])->name('students.edit-score');
+Route::get('players/{student}/{subject}/edit-score', [PlayerController::class, 'editScore'])->name('players.edit-score');
 
-Route::get('students/{student}/register-subject', [PlayerController::class, 'registerSubject'])->name('students.register-subject');
+Route::get('players/{student}/register-subject', [PlayerController::class, 'registerSubject'])->name('players.register-subject');
 
-Route::post('students/{student}/register-subject', [PlayerController::class, 'storeRegisterSubject'])->name('students.store-register-subject');
+Route::post('players/{student}/register-subject', [PlayerController::class, 'storeRegisterSubject'])->name('players.store-register-subject');
 
-Route::put('students/{student}/update-scores', [PlayerController::class, 'updateScores'])->name('students.update-scores');
+Route::put('players/{student}/update-scores', [PlayerController::class, 'updateScores'])->name('players.update-scores');
 
-Route::post('excel/import-student', [PlayerController::class, 'import'])->name('students.import');
+Route::post('excel/import-student', [PlayerController::class, 'import'])->name('players.import');
 
-Route::get('excel/export-template', [PlayerController::class, 'getTemplate'])->name('students.get-template');
+Route::get('excel/export-template', [PlayerController::class, 'getTemplate'])->name('players.get-template');
 
 Route::get('list-subject-ajax', [PlayerController::class, 'getListSubjectAjax']);
 

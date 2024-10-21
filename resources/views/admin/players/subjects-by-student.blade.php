@@ -24,7 +24,7 @@
                 </div>
             </div>
             <div>
-                <a href="{{ isset(auth()->user()->student->id) ? route('profile.edit') : route('students.index') }}"
+                <a href="{{ isset(auth()->user()->student->id) ? route('profile.edit') : route('players.index') }}"
                    class="btn btn-info">{{ __('Back') }}</a>
             </div>
         </div>
@@ -35,7 +35,7 @@
                 </div>
                 <div>
                     @canany(['register_subject', 'self_register_subject'])
-                        <a href="{{ route('students.register-subject', $students->id) }}" class="btn btn-primary">+
+                        <a href="{{ route('players.register-subject', $students->id) }}" class="btn btn-primary">+
                             {{ __('Register Coach') }}</a>
                     @endcanany
                 </div>
@@ -43,7 +43,7 @@
             <div class="card-subject__add-subjects pb-3" id="form-update">
                 <div class="pb-3 ">
                     <form id="updateScoreForm" method="POST"
-                          action="{{ route('students.update-scores', $students->id) }}">
+                          action="{{ route('players.update-scores', $students->id) }}">
                         @csrf
                         @method('PUT')
                         <div id="subjectsContainer">

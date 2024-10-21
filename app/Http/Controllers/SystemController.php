@@ -37,7 +37,9 @@ class SystemController extends Controller
             DB::beginTransaction();
             $data['logo'] = Storage::disk('public')->put('uploads', $request->file('logo'));
             $system = $this->systemRepository->find(1);
-            $system->logo ? unlink($system->logo) : '';
+            if (isset($system->logo) && file_exists(public_path('storage/'.$system->logo))) {
+                unlink(public_path('storage/'.$system->logo));
+            }
             $system = $this->systemRepository->update($data, $system->id);
             DB::commit();
             if (!$system) {

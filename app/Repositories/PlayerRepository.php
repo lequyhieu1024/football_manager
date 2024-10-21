@@ -16,69 +16,30 @@ class PlayerRepository extends BaseRepository
 
     public function filter(array $data)
     {
-        $query = $this->model->select('id', 'user_id', 'student_code', 'gender', 'birthday', 'status')->with('user:id,name', 'coaches:id');
+        $query = $this->model->query();
 
         if (isset($data['age_from'])) {
-            $dateFrom = Carbon::now()->subYears($data['age_from'])->startOfDay()->toDateString();
-            $query->where('birthday', '<=', $dateFrom);
+            $dateFrom = Carbon::now()->subYears($data['age_from'])->toDateString();
+            $query->where('yob', '<=', $dateFrom);
         }
         if (isset($data['age_to'])) {
-            $dateTo = Carbon::now()->subYears($data['age_to'])->endOfDay()->toDateString();;
-            $query->where('birthday', '>=', $dateTo);
+            $dateTo = Carbon::now()->subYears($data['age_to'])->toDateString();;
+            $query->where('yob', '>=', $dateTo);
         }
-        if (isset($data['score_from']) || isset($data['score_to'])) {
-            $query->whereHas('coaches', function ($query) use ($data) {
-                $query->select(DB::raw('AVG(score) as avg_score'))
-                    ->groupBy('student_id');
-
-                if (isset($data['score_from'])) {
-                    $query->having('avg_score', '>=', $data['score_from']);
-                }
-                if (isset($data['score_to'])) {
-                    $query->having('avg_score', '<=', $data['score_to']);
-                }
-            });
-        }
-
-        if (!empty($data['network']) && array_filter($data['network'])) {
-            $data['network'] = array_filter($data['network']);
-
-            $query->where(function ($query) use ($data) {
-                foreach ($data['network'] as $network) {
-                    $networkEnum = Network::from($network);
-                    switch ($networkEnum) {
-                        case Network::VINAPHONE:
-                            $query->orWhere('phone', 'REGEXP', '^08[2-5]');
-                            break;
-                        case Network::VIETTEL:
-                            $query->orWhere('phone', 'REGEXP', '^03[2-9]|^09[0-9]|^086');
-                            break;
-                        case Network::MOBIFONE:
-                            $query->orWhere('phone', 'REGEXP', '^07[0-9]');
-                            break;
-                        default:
-                            break;
-                    }
-                }
-            });
-        }
-
-        if (!empty($data['status']) && array_filter($data['status'])) {
-            $data['status'] = array_filter($data['status']);
-            $query->whereIn('status', $data['status']);
-        }
-        return $query->paginate($data['size'] ?? 10);
-    }
-
-    public function updateStudent($data, $id)
-    {
-        $student = $this->model->findOrFail($id);
-        return $student->update($data);
-    }
-
-    public function show($id)
-    {
-        return $this->model->with('user', 'department', 'coaches')->findOrFail($id);
+//        if (isset($data['score_from']) || isset($data['score_to'])) {
+//            $query->whereHas('coaches', function ($query) use ($data) {
+//                $query->select(DB::raw('AVG(score) as avg_score'))
+//                    ->groupBy('student_id');
+//
+//                if (isset($data['score_from'])) {
+//                    $query->having('avg_score', '>=', $data['score_from']);
+//                }
+//                if (isset($data['score_to'])) {
+//                    $query->having('avg_score', '<=', $data['score_to']);
+//                }
+//            });
+//        }
+        return $query->paginate($data['size'] ?? 12);
     }
 
     public function getScoreByStudentSubjectId($studentId, $subjectId)

@@ -10,7 +10,7 @@
             <div class="modal-body">
                 <div class="row pb-4 text-align-center">
                     <div class="col-md-12 mb-2 mt-2">
-                        {!! Form::open(['route' => ['students.update-scores', $studentId], 'method' => 'PUT']) !!}
+                        {!! Form::open(['route' => ['players.update-scores', $studentId], 'method' => 'PUT']) !!}
                         <div class="row">
                             <div class="col-md-4"> {{ __('Score') }} :</div>
                             <div class="col-md-8 d-flex gap-2">

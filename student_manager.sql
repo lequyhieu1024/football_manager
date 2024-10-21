@@ -208,7 +208,7 @@ CREATE TABLE `role_has_permissions` (
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `students`
+-- Cấu trúc bảng cho bảng `players`
 --
 
 CREATE TABLE `students` (
@@ -408,7 +408,7 @@ ALTER TABLE `role_has_permissions`
   ADD KEY `role_has_permissions_role_id_foreign` (`role_id`);
 
 --
--- Chỉ mục cho bảng `students`
+-- Chỉ mục cho bảng `players`
 --
 ALTER TABLE `students`
   ADD PRIMARY KEY (`id`),
@@ -511,7 +511,7 @@ ALTER TABLE `roles`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT cho bảng `students`
+-- AUTO_INCREMENT cho bảng `players`
 --
 ALTER TABLE `students`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
@@ -564,7 +564,7 @@ ALTER TABLE `role_has_permissions`
   ADD CONSTRAINT `role_has_permissions_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE;
 
 --
--- Các ràng buộc cho bảng `students`
+-- Các ràng buộc cho bảng `players`
 --
 ALTER TABLE `students`
   ADD CONSTRAINT `students_department_id_foreign` FOREIGN KEY (`department_id`) REFERENCES `departments` (`id`) ON DELETE CASCADE,

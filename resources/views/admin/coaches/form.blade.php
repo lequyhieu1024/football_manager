@@ -25,7 +25,7 @@
         @endif
 
         <div class="row">
-            <div class="form-group col-md-6">
+            <div class="form-group mb-2 col-md-6">
                 {!! Form::label('name', __('Coach Name')) !!}
                 {!! Form::text('name', null, [
                     'class' => 'form-control',
@@ -36,7 +36,7 @@
                 @endif
             </div>
 
-            <div class="form-group col-md-6">
+            <div class="form-group mb-2 col-md-6">
                 {!! Form::label('avatar', __('Avatar')) !!}
                 {!! Form::file('avatar', [
                     'class' => 'form-control',
@@ -46,7 +46,7 @@
                 @endif
             </div>
 
-            <div class="form-group col-md-6">
+            <div class="form-group mb-2 col-md-6">
                 {!! Form::label('phone', __('Phone')) !!}
                 {!! Form::text('phone', null, [
                     'class' => 'form-control',
@@ -57,7 +57,7 @@
                 @endif
             </div>
 
-            <div class="form-group col-md-6">
+            <div class="form-group mb-2 col-md-6">
                 {!! Form::label('email', __('Email')) !!}
                 {!! Form::email('email', null, [
                     'class' => 'form-control',
@@ -68,7 +68,7 @@
                 @endif
             </div>
 
-            <div class="form-group col-md-6">
+            <div class="form-group mb-2 col-md-6">
                 {!! Form::label('gender', __('Gender')) !!}
                 {!! Form::select('gender', [1 => __('Male'), 0 => __('Female')], null, [
                     'class' => 'form-control',
@@ -79,7 +79,7 @@
                 @endif
             </div>
 
-            <div class="form-group col-md-6">
+            <div class="form-group mb-2 col-md-6">
                 {!! Form::label('yob', __('Year of Birth')) !!}
                 {!! Form::number('yob', null, [
                     'class' => 'form-control',
@@ -90,7 +90,7 @@
                 @endif
             </div>
 
-            <div class="form-group col-md-6">
+            <div class="form-group mb-2 col-md-6">
                 {!! Form::label('address', __('Address')) !!}
                 {!! Form::text('address', null, [
                     'class' => 'form-control',
@@ -101,11 +101,12 @@
                 @endif
             </div>
 
-            <div class="form-group col-md-12">
+            <div class="form-group mb-2 col-md-12">
                 {!! Form::label('description', __('Description')) !!}
                 {!! Form::textarea('description', null, [
                     'class' => 'form-control',
                     'placeholder' => __('Description'),
+                    'id' => 'editor'
                 ]) !!}
                 @if ($errors->has('description'))
                     <span class="text-danger">{{ $errors->first('description') }}</span>
@@ -113,7 +114,7 @@
             </div>
         </div>
 
-        <div class="form-group mt-2">
+        <div class="form-group mb-2 mt-2">
             {!! Form::submit($content, ['class' => 'btn btn-primary']) !!}
             {!! Form::close() !!}
             <a href="{{ route('coaches.index') }}" class="btn btn-info">{{ __('Back') }}</a>

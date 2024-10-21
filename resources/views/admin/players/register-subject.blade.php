@@ -7,7 +7,7 @@
             </h1>
         </div>
         {!! Form::open([
-            'route' => ['students.store-register-subject', $id],
+            'route' => ['players.store-register-subject', $id],
             'method' => 'POST',
             'class' => 'w-100',
         ]) !!}
@@ -32,7 +32,7 @@
             @endif
 
             {!! Form::close() !!}
-            <a href="{{ route('students.subject', $id) }}" class="btn btn-info">{{ __('Back') }}</a>
+            <a href="{{ route('players.subject', $id) }}" class="btn btn-info">{{ __('Back') }}</a>
         </div>
     </div>
 @endsection

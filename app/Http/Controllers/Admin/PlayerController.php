@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Exports\StudentsExport;
-use App\Repositories\RoleRepository;
+use App\Models\Club;
 use Exception;
 use App\Jobs\SendEmailJob;
 use Illuminate\Http\Request;
@@ -11,28 +11,23 @@ use App\Imports\StudentsImport;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ImportStudentExcelRequest;
-use App\Repositories\UserRepository;
 use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Repositories\PlayerRepository;
-use App\Repositories\CoachRepository;
-use App\Http\Requests\StudentFormRequest;
+use App\Http\Requests\PlayerFormRequest;
 use App\Repositories\ClubRepository;
 use App\Http\Requests\RegisterSubjectFormRequest;
 use App\Http\Requests\ScoreFormRequest;
 
 class PlayerController extends Controller
 {
-    protected $studentRepository;
-    protected $userRepository;
-    protected $departmentRepository;
-    protected $subjectRepository;
-    protected $roleRepository;
+    protected $playerRepository;
+    protected $clubRepository;
 
     /**
      * Display a listing of the resource.
      */
-    public function __construct(PlayerRepository $studentRepository, UserRepository $userRepository, ClubRepository $departmentRepository, CoachRepository $subjectRepository, RoleRepository $roleRepository)
+    public function __construct(PlayerRepository $playerRepository, ClubRepository $clubRepository)
     {
 //        $this->middleware('permission:list_student')->only(['index']);
 //        $this->middleware('permission:create_student')->only(['create', 'store']);
@@ -42,18 +37,14 @@ class PlayerController extends Controller
 //        $this->middleware('permission:update_score')->only(['editScore', 'updateScores']);
 //        $this->middleware('permission:self_register_subject|register_subject')->only(['registerSubject', 'storeRegisterSubject']);
 //        $this->middleware('permission:import_excel')->only(['import', 'getTemplate']);
-        $this->studentRepository = $studentRepository;
-        $this->userRepository = $userRepository;
-        $this->departmentRepository = $departmentRepository;
-        $this->subjectRepository = $subjectRepository;
-        $this->roleRepository = $roleRepository;
+        $this->playerRepository = $playerRepository;
+        $this->clubRepository = $clubRepository;
     }
 
     public function index(Request $request)
     {
-        // dd($request->all());
-        $students = $this->studentRepository->filter($request->all());
-        return view('admin.students.index', compact('students'));
+        $players = $this->playerRepository->filter($request->all());
+        return view('admin.players.index', compact('players'));
     }
 
     /**
@@ -61,28 +52,25 @@ class PlayerController extends Controller
      */
     public function create()
     {
-        $departments = $this->departmentRepository->getNameAndIds();
-        return view('admin.students.create', compact('departments'));
+        $is_disabled = false;
+        $clubs = $this->clubRepository->getNameAndIds();
+        return view('admin.players.form', compact('clubs','is_disabled'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StudentFormRequest $request)
+    public function store(PlayerFormRequest $request)
     {
         try {
             DB::beginTransaction();
-            $data = $request->validated();
+            $data = $request->all();
             if ($request->hasFile('avatar')) {
                 $data['avatar'] = Storage::disk('public')->put('uploads', $request->file('avatar'));
             }
-            $user = $this->userRepository->create($data)->assignRole($this->roleRepository->findOrFail(16)->name);
-            $data['user_id'] = $user->id;
-            $data['student_code'] = date('Y') . $user->id;
-            $this->studentRepository->create($data);
-            SendEmailJob::dispatch($data);
+            $this->playerRepository->create($data);
             DB::commit();
-            return redirect()->route('students.index')->with('success', __('Create Player Successfully'));
+            return redirect()->route('players.index')->with('success', __('Create Player Successfully'));
         } catch (Exception $e) {
             DB::rollBack();
             dd($e->getMessage());
@@ -94,8 +82,10 @@ class PlayerController extends Controller
      */
     public function show(string $id)
     {
-        $student = $this->studentRepository->show($id);
-        return view('admin.students.show', compact('student'));
+        $player = $this->playerRepository->findOrFail($id);
+        $clubs = $this->clubRepository->getNameAndIds();
+        $is_disabled = true;
+        return view('admin.players.form', compact('player', 'is_disabled','clubs'));
     }
 
     /**
@@ -103,43 +93,34 @@ class PlayerController extends Controller
      */
     public function edit(string $id)
     {
-        $student = $this->studentRepository->show($id);
-        $departments = $this->departmentRepository->getNameAndIds();
-        return view('admin.students.edit', compact('student', 'departments'));
+        $is_disabled = false;
+        $player = $this->playerRepository->findOrFail($id);
+        $clubs = $this->clubRepository->getNameAndIds();
+        return view('admin.players.form', compact('player', 'clubs','is_disabled'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(StudentFormRequest $request, string $id)
+    public function update(PlayerFormRequest $request, string $id)
     {
         try {
             DB::beginTransaction();
             $data = $request->all();
             if ($request->hasFile('avatar')) {
-                $data['avatar'] = upload_image($request->file('avatar'));
-                $this->studentRepository->findOrFail($id)->avatar ? unlink($this->studentRepository->findOrFail($id)->avatar) : '';
+                $data['avatar'] = Storage::disk('public')->put('uploads', $request->file('avatar'));
+                if ($this->playerRepository->findOrFail($id)->avatar && file_exists('storage/' . $this->playerRepository->findOrFail($id)->avatar)) {
+                    unlink('storage/' . $this->playerRepository->findOrFail($id)->avatar);
+                }
             } else {
-                $data['avatar'] = $this->studentRepository->findOrFail($id)->avatar;
+                $data['avatar'] = $this->playerRepository->findOrFail($id)->avatar;
             }
-
-            $user = $this->userRepository->findOrFail($this->studentRepository->show($id)->user_id);
-            !empty($data['password']) ? $data['password'] : $user->password;
-
-            $this->userRepository->update($data, $this->studentRepository->show($id)->user_id);
-
-            $this->studentRepository->updateStudent($data, $id);
+            $this->playerRepository->update($data, $id);
             DB::commit();
-            return response()->json([
-                'success' => true,
-                'message' => 'Player updated successfully!',
-            ]);
+            return redirect()->route('players.index')->with('success', __('Updated Player Successfully'));
         } catch (Exception $e) {
             DB::rollBack();
-            return response()->json([
-                'success' => false,
-                'message' => 'An error occurred. Please try again.',
-            ], 500);
+            return $e->getMessage();
         }
     }
 
@@ -150,10 +131,10 @@ class PlayerController extends Controller
     {
         try {
             DB::beginTransaction();
-            $student = $this->studentRepository->show($id);
-            $student->avatar ? unlink($student->avatar) : '';
-            $student->delete($id);
-            // $student->user->delete();
+            if ($this->playerRepository->findOrFail($id)->avatar && file_exists('storage/' . $this->playerRepository->findOrFail($id)->avatar)) {
+                unlink('storage/' . $this->playerRepository->findOrFail($id)->avatar);
+            }
+            $this->playerRepository->delete($id);
             DB::commit();
             return redirect()->back()->with('success', __('Delete Player Successfully'));
         } catch (Exception $e) {
@@ -162,80 +143,9 @@ class PlayerController extends Controller
         }
     }
 
-    public function getSubjects($id)
-    {
-        $subjects = $this->subjectRepository->getAllNotPaginate();
-        $students = $this->studentRepository->show($id);
-        return view('admin.students.coaches-by-student', compact('students', 'subjects'));
-    }
-
-    public function editScore($studentId, $subjectId)
-    {
-        $score = $this->studentRepository->getScoreByStudentSubjectId($studentId, $subjectId);
-        return view('admin.students.update-score', compact('score', 'studentId', 'subjectId'));
-    }
-
-    public function updateScores(ScoreFormRequest $request, $studentId)
-    {
-        $this->studentRepository->updateScore($studentId, $request->scores);
-        return redirect()->back()->with('success', __('Updated Successfully'));
-    }
-
-    public function registerSubject($id)
-    {
-        $subjects = $this->subjectRepository->getSubjectDoesntHasStudent($id);
-        return view('admin.students.register-subject', compact('subjects', 'id'));
-    }
-
-    public function storeRegisterSubject(RegisterSubjectFormRequest $request, $id)
-    {
-        try {
-            DB::beginTransaction();
-            $student = $this->studentRepository->findOrFail($id);
-            $studentSubject = $student->subjects->pluck('id')->toArray();
-            $subejectId = is_array($request->subject_id) ? $request->subject_id : [$request->subject_id];
-
-            if (!empty(array_intersect($studentSubject, $subejectId))) {
-                if (!auth()->user()->student) {
-                    return redirect()->route('students.subject', $id)->with('error', __('Registation Failed'));
-                }
-                return redirect()->back()->with('error', __('Registation Failed'));
-            }
-            $this->studentRepository->registerSubject($id, $request->subject_id);
-            DB::commit();
-            if (!auth()->user()->student) {
-                return redirect()->route('students.subject', $id)->with('success', __('Registation Successfully'));
-            }
-            return redirect()->back()->with('success', __('Registation Successfully'));
-        } catch (\Throwable $th) {
-            DB::rollBack();
-            throw $th;
-        }
-    }
-
-    public function getTemplate()
-    {
-        return Excel::download(new StudentsExport, 'students_subjects_scores.xlsx');
-    }
-
-    public function import(ImportStudentExcelRequest $request)
-    {
-        $import = new StudentsImport();
-        Excel::import($import, $request->file('file'));
-        $errors = $import->getErrors();
-
-        if (count($errors) > 0) {
-            return response()->json(['errors' => $errors], 404);
-        }
-        return response()->json(['success' => __('Import Successfully')]);
-    }
-
-    public function getListSubjectAjax()
-    {
-        $subjects = $this->subjectRepository->getAllNotPaginate();
-        return response()->json([
-            'success' => true,
-            'coaches' => $subjects
-        ], 200);
-    }
+//    public function getGoal($playerId)
+//    {
+//        $score = $this->playerRepository->getScoreByStudentSubjectId($studentId, $subjectId);
+//        return view('admin.players.update-score', compact('score', 'studentId', 'subjectId'));
+//    }
 }

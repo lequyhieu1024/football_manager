@@ -11,29 +11,22 @@ class Player extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
-        'user_id',
-        'student_code',
+        'name',
         'avatar',
         'phone',
+        'email',
         'gender',
-        'birthday',
+        'yob',
+        'weight',
+        'height',
+        'position',
         'address',
-        'status',
-        'department_id',
+        'description',
+        'club_id',
     ];
 
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
-
-    public function department()
+    public function club()
     {
         return $this->belongsTo(Club::class);
-    }
-
-    public function subjects()
-    {
-        return $this->belongsToMany(Coach::class)->withPivot('id', 'score')->withTimestamps();
     }
 }
