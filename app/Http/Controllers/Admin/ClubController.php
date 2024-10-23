@@ -58,10 +58,14 @@ class ClubController extends Controller
     public function update(ClubFormRequest $request, $id)
     {
         $data = $request->all();
+        $club = $this->clubRepository->findOrFail($id);
         if ($request->hasFile('logo')) {
             $data['logo'] = Storage::disk('public')->put('uploads', $request->file('logo'));
+            if (file_exists('storage/' . $club->logo) AND !empty($club->logo)) {
+                unlink('storage/' . $club->logo);
+            }
         } else {
-            $data['logo'] = $this->clubRepository->findOrFail($id)->logo;
+            $data['logo'] = $club->logo;
         }
         $this->clubRepository->update($data, $id);
         return redirect()->route('clubs.index')->with('success', __('Updated Successfully'));

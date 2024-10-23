@@ -19,4 +19,7 @@ class Yard extends Model
     {
         return $this->hasMany(FMatch::class, 'yard_id');
     }
+    public function images() {
+        return $this->hasMany(Image::class, 'yard_id');
+    }
 }

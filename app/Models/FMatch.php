@@ -9,6 +9,7 @@ class FMatch extends Model
 {
     use HasFactory;
 
+    protected $table = 'matches';
     protected $fillable = [
         'title',
         'club1_id',

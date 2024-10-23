@@ -11,18 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('matchs', function (Blueprint $table) {
+        Schema::create('matches', function (Blueprint $table) {
             $table->id();
             $table->string('title')->nullable();
             $table->unsignedBigInteger('club1_id');
-            $table->integer('banner_club1')->nullable();
+            $table->string('banner_club1')->nullable();
             $table->unsignedBigInteger('club2_id');
-            $table->integer('banner_club2')->nullable();
+            $table->string('banner_club2')->nullable();
             $table->enum('match_type', [7,9,11]);
             $table->date('at_day');
             $table->time('at_time');
             $table->integer('match_duration');
-            $table->enum('status', ['not_started', 'in_progress', 'completed'])->default('not_started');
+            $table->enum('status', ['not_started', 'in_progress', 'completed', 'cancelled'])->default('not_started');
             $table->text('description')->nullable();
             $table->unsignedBigInteger('yard_id');
             $table->timestamps();
@@ -34,6 +34,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('matchs');
+        Schema::dropIfExists('matches');
     }
 };

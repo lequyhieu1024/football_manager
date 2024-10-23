@@ -2,11 +2,12 @@
 
 namespace App\Enums;
 
-enum Status: int
+enum Status: string
 {
-    case NOT_STARTED = 1;
-    case IN_PROGRESS = 2;
-    case COMPLETED = 3;
+    case NOT_STARTED = 'not_started';
+    case IN_PROGRESS = 'in_progress';
+    case COMPLETED = 'completed';
+    case CANCELLED = 'cancelled';
 
     public static function getSelectOptions(): array
     {
@@ -14,7 +15,17 @@ enum Status: int
             '' => __('Chose Status'),
             self::NOT_STARTED->value => __("Haven't started yet"),
             self::IN_PROGRESS->value => __('In progress'),
-            self::COMPLETED->value => __('Finished'),
+            self::COMPLETED->value => __('Completed'),
+            self::CANCELLED->value => __('Cancelled'),
         ];
+    }
+    public static function getLabel(string $value): string
+    {
+        return match ($value) {
+            self::NOT_STARTED->value => __("Haven't started yet"),
+            self::IN_PROGRESS->value => __('In progress'),
+            self::COMPLETED->value => __('Completed'),
+            self::CANCELLED->value => __('Cancelled'),
+        };
     }
 }

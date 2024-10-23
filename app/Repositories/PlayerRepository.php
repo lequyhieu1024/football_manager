@@ -5,7 +5,7 @@ namespace App\Repositories;
 use Carbon\Carbon;
 use App\Models\Player;
 use Illuminate\Support\Facades\DB;
-use App\Enums\Network;
+use App\Enums\MatchType;
 
 class PlayerRepository extends BaseRepository
 {
@@ -40,36 +40,5 @@ class PlayerRepository extends BaseRepository
 //            });
 //        }
         return $query->paginate($data['size'] ?? 12);
-    }
-
-    public function getScoreByStudentSubjectId($studentId, $subjectId)
-    {
-        $student = $this->model->with(['coaches' => function ($query) use ($subjectId) {
-            $query->where('coaches.id', $subjectId);
-        }])->findOrFail($studentId);
-
-        $subject = $student->subjects->first();
-
-        if ($subject) {
-            return $subject->pivot->score;
-        } else {
-            return null;
-        }
-    }
-
-    public function updateScore($studentId, $scores)
-    {
-        $student = $this->findOrFail($studentId);
-        $student->subjects()->sync($scores);
-    }
-
-    public function registerSubject($studentId, $subjectId)
-    {
-        $student = $this->model->findOrFail($studentId);
-        $student->subjects()->attach($subjectId);
-        if ($student->status == \App\Enums\Status::NOT_STUDIED_YET->value) {
-            $student->update(['status' => \App\Enums\Status::STUDYING->value]);
-        }
-        return $student;
     }
 }

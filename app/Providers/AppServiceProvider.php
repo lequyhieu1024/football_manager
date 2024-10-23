@@ -17,11 +17,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->app->bind(RepositoryInterface::class, UserRepository::class);
-        $this->app->bind(RepositoryInterface::class, PlayerRepository::class);
-        $this->app->bind(RepositoryInterface::class, ClubRepository::class);
-        $this->app->bind(RepositoryInterface::class, CoachRepository::class);
-
         require_once app_path('Http/Helpers.php');
     }
 

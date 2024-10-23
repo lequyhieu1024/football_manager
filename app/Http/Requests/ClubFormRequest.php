@@ -43,6 +43,9 @@ class ClubFormRequest extends FormRequest
             'yob' => 'nullable|numeric|digits:4',
             'address' => 'nullable|string',
             'description' => 'nullable|string',
+            'total_members' => 'required|integer|min:1',
+            'coach_id' => 'required|integer|exists:coaches,id',
+            'manager_id' => 'required|integer|exists:coaches,id',
         ];
     }
 }
